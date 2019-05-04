@@ -1,0 +1,224 @@
+
+<!doctype html>
+<!--[if lt IE 8]> <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Tiles</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <style>
+    body { background: black; }
+    #map {
+      transform: scale(0.5);
+    }
+    .row {
+      display: flex
+    }
+    .row:nth-child(even) {
+      margin: -34px 0 -34px 60.5px;
+    }
+    .tile {
+      width: 120px;
+      height: 140px;
+      background-image: url('/hexagonAll_sheet.png');
+      margin-right: 1px;
+      opacity: 0.8;
+      transition: opacity 0.2s ease;
+    }
+    .tile:hover {
+      opacity: 1.0;
+    }
+
+    .dirt_01 { background-position: -732px -1420px; }
+    .dirt_02 { background-position: -732px -1278px; }
+    .dirt_03 { background-position: -732px -1136px; }
+    .dirt_04 { background-position: -732px -994px; }
+    .dirt_05 { background-position: -732px -852px; }
+    .dirt_06 { background-position: -732px -710px; }
+    .dirt_07 { background-position: -244px -1136px; }
+    .dirt_08 { background-position: -732px -426px; }
+    .dirt_09 { background-position: -732px -284px; }
+    .dirt_10 { background-position: -732px -142px; }
+    .dirt_11 { background-position: -732px -0px; }
+    .dirt_12 { background-position: -610px -1846px; }
+    .dirt_13 { background-position: -610px -1704px; }
+    .dirt_14 { background-position: -610px -1562px; }
+    .dirt_15 { background-position: -610px -1420px; }
+    .dirt_16 { background-position: -122px -426px; }
+    .dirt_17 { background-position: -610px -1136px; }
+    .dirt_18 { background-position: -610px -994px; }
+    .dirt_19 { background-position: -1342px -245px; }
+    .grass_01 { background-position: -610px -710px; }
+    .grass_02 { background-position: -610px -568px; }
+    .grass_03 { background-position: -610px -426px; }
+    .grass_04 { background-position: -610px -284px; }
+    .grass_05 { background-position: -610px -142px; }
+    .grass_06 { background-position: -610px -0px; }
+    .grass_07 { background-position: -488px -1846px; }
+    .grass_08 { background-position: -488px -1704px; }
+    .grass_09 { background-position: -488px -1562px; }
+    .grass_10 { background-position: -488px -1420px; }
+    .grass_11 { background-position: -488px -1278px; }
+    .grass_12 { background-position: -488px -1136px; }
+    .grass_13 { background-position: -488px -994px; }
+    .grass_14 { background-position: -488px -852px; }
+    .grass_15 { background-position: -488px -710px; }
+    .grass_16 { background-position: -488px -568px; }
+    .grass_17 { background-position: -488px -426px; }
+    .grass_18 { background-position: -488px -284px; }
+    .grass_19 { background-position: -1342px -451px; }
+    .mars_01 { background-position: -488px -0px; }
+    .mars_02 { background-position: -1342px -555px; }
+    .mars_03 { background-position: -366px -1704px; }
+    .mars_04 { background-position: -366px -1562px; }
+    .mars_05 { background-position: -366px -1420px; }
+    .mars_06 { background-position: -366px -1278px; }
+    .mars_07 { background-position: -366px -1136px; }
+    .mars_08 { background-position: -366px -994px; }
+    .mars_09 { background-position: -366px -852px; }
+    .mars_10 { background-position: -366px -710px; }
+    .mars_11 { background-position: -366px -568px; }
+    .mars_12 { background-position: -366px -426px; }
+    .mars_13 { background-position: -366px -284px; }
+    .mars_14 { background-position: -366px -142px; }
+    .mars_15 { background-position: -366px -0px; }
+    .mars_16 { background-position: -244px -1846px; }
+    .mars_17 { background-position: -244px -1704px; }
+    .mars_18 { background-position: -244px -1562px; }
+    .mars_19 { background-position: -244px -1420px; }
+    .medieval_archery { background-position: -976px -568px; }
+    .medieval_archway { background-position: -976px -426px; }
+    .medieval_blacksmith { background-position: -976px -284px; }
+    .medieval_cabin { background-position: -976px -142px; }
+    .medieval_church { background-position: -976px -0px; }
+    .medieval_farm { background-position: -854px -1846px; }
+    .medieval_house { background-position: -854px -1704px; }
+    .medieval_largeCastle { background-position: -854px -1562px; }
+    .medieval_lumber { background-position: -610px -852px; }
+    .medieval_mine { background-position: -488px -142px; }
+    .medieval_openCastle { background-position: -854px -1136px; }
+    .medieval_ruins { background-position: -854px -994px; }
+    .medieval_smallCastle { background-position: -854px -852px; }
+    .medieval_tower { background-position: -854px -710px; }
+    .medieval_windmill { background-position: -854px -568px; }
+    .military_entrance { background-position: -854px -426px; }
+    .military_hangar { background-position: -854px -284px; }
+    .military_rockets { background-position: -854px -142px; }
+    .military_tanks { background-position: -366px -1846px; }
+    .military_turretLarge { background-position: -732px -1846px; }
+    .military_turretMedium { background-position: -732px -1704px; }
+    .military_turretSmall { background-position: -732px -1562px; }
+    .mill_crane { background-position: -610px -1278px; }
+    .mill_cutter { background-position: -1220px -1562px; }
+    .mill_factory { background-position: -1220px -1278px; }
+    .mill_stoneWarehouse { background-position: -1220px -1704px; }
+    .mill_storage { background-position: -1342px -0px; }
+    .mill_warehouse { background-position: -1220px -1846px; }
+    .modern_campsite { background-position: -1220px -994px; }
+    .modern_cornerShop { background-position: -1220px -852px; }
+    .modern_house { background-position: -1220px -568px; }
+    .modern_houseSmall { background-position: -1220px -1420px; }
+    .modern_largeBuilding { background-position: -1220px -284px; }
+    .modern_oldBuilding { background-position: -1220px -1136px; }
+    .modern_petrol { background-position: -1098px -1846px; }
+    .modern_shop { background-position: -1098px -1136px; }
+    .modern_skyscraper { background-position: -1220px -710px; }
+    .modern_skyscraperGlass { background-position: -1098px -994px; }
+    .modern_trailerpark { background-position: -1220px -426px; }
+    .modern_villa { background-position: -1098px -426px; }
+    .modern_villageLarge { background-position: -1220px -142px; }
+    .sand_01 { background-position: -244px -1278px; }
+    .sand_02 { background-position: -1342px -348px; }
+    .sand_03 { background-position: -244px -994px; }
+    .sand_04 { background-position: -244px -852px; }
+    .sand_05 { background-position: -244px -710px; }
+    .sand_06 { background-position: -244px -568px; }
+    .sand_07 { background-position: -244px -426px; }
+    .sand_08 { background-position: -244px -284px; }
+    .sand_09 { background-position: -244px -142px; }
+    .sand_10 { background-position: -244px -0px; }
+    .sand_11 { background-position: -122px -1846px; }
+    .sand_12 { background-position: -122px -1704px; }
+    .sand_13 { background-position: -122px -1562px; }
+    .sand_14 { background-position: -122px -1420px; }
+    .sand_15 { background-position: -122px -1278px; }
+    .sand_16 { background-position: -122px -1136px; }
+    .sand_17 { background-position: -122px -994px; }
+    .sand_18 { background-position: -122px -852px; }
+    .sand_19 { background-position: -122px -710px; }
+    .scifi_base { background-position: -1220px -0px; }
+    .scifi_building { background-position: -976px -1704px; }
+    .scifi_cargo { background-position: -1098px -1704px; }
+    .scifi_corner { background-position: -1098px -1562px; }
+    .scifi_domes { background-position: -1098px -1420px; }
+    .scifi_energy { background-position: -1098px -1278px; }
+    .scifi_factory { background-position: -976px -852px; }
+    .scifi_factoryHangar { background-position: -854px -1420px; }
+    .scifi_factoryHigh { background-position: -1098px -852px; }
+    .scifi_foliage { background-position: -1098px -710px; }
+    .scifi_hangar { background-position: -1098px -568px; }
+    .scifi_headquarters { background-position: -854px -1278px; }
+    .scifi_living { background-position: -1098px -284px; }
+    .scifi_port { background-position: -1098px -142px; }
+    .scifi_silo { background-position: -1098px -0px; }
+    .scifi_skyscraper { background-position: -976px -1846px; }
+    .scifi_tower { background-position: -854px -0px; }
+    .stone_01 { background-position: -122px -568px; }
+    .stone_02 { background-position: -1342px -142px; }
+    .stone_03 { background-position: -122px -284px; }
+    .stone_04 { background-position: -122px -142px; }
+    .stone_05 { background-position: -122px -0px; }
+    .stone_06 { background-position: -0px -1846px; }
+    .stone_07 { background-position: -0px -1704px; }
+    .stone_08 { background-position: -0px -1562px; }
+    .stone_09 { background-position: -0px -1420px; }
+    .stone_10 { background-position: -0px -1278px; }
+    .stone_11 { background-position: -0px -1136px; }
+    .stone_12 { background-position: -0px -994px; }
+    .stone_13 { background-position: -0px -852px; }
+    .stone_14 { background-position: -0px -710px; }
+    .stone_15 { background-position: -0px -568px; }
+    .stone_16 { background-position: -0px -426px; }
+    .stone_17 { background-position: -0px -284px; }
+    .stone_18 { background-position: -0px -142px; }
+    .stone_19 { background-position: -0px -0px; }
+    .western_bank { background-position: -976px -1562px; }
+    .western_general { background-position: -976px -1420px; }
+    .western_indians { background-position: -976px -1278px; }
+    .western_saloon { background-position: -976px -1136px; }
+    .western_sheriff { background-position: -976px -994px; }
+    .western_station { background-position: -732px -568px; }
+    .western_watertower { background-position: -976px -710px; }
+  </style>
+</head>
+
+<body>
+  <div id="map"></div>
+
+  <script>
+    var wrapper = document.getElementById('map');
+    var tileClasses = ['dirt_01', 'dirt_02', 'dirt_03', 'dirt_04', 'dirt_05', 'dirt_06', 'dirt_07', 'dirt_08', 'dirt_09', 'dirt_10', 'dirt_11', 'dirt_12', 'dirt_13', 'dirt_14', 'dirt_15', 'dirt_16', 'dirt_17', 'dirt_18', 'grass_01', 'grass_02', 'grass_03', 'grass_04', 'grass_05', 'grass_06', 'grass_07', 'grass_08', 'grass_09', 'grass_10', 'grass_11', 'grass_12', 'grass_13', 'grass_14', 'grass_15', 'grass_16', 'grass_17', 'grass_18', 'mars_01', 'mars_03', 'mars_04', 'mars_05', 'mars_06', 'mars_07', 'mars_08', 'mars_09', 'mars_10', 'mars_11', 'mars_12', 'mars_13', 'mars_14', 'mars_15', 'mars_16', 'mars_17', 'mars_18', 'mars_19', 'medieval_archery', 'medieval_archway', 'medieval_blacksmith', 'medieval_cabin', 'medieval_church', 'medieval_farm', 'medieval_house', 'medieval_largeCastle', 'medieval_lumber', 'medieval_mine', 'medieval_openCastle', 'medieval_ruins', 'medieval_smallCastle', 'medieval_tower', 'medieval_windmill', 'military_entrance', 'military_hangar', 'military_rockets', 'military_tanks', 'military_turretLarge', 'military_turretMedium', 'military_turretSmall', 'mill_crane', 'mill_cutter', 'mill_factory', 'mill_stoneWarehouse', 'mill_storage', 'mill_warehouse', 'modern_campsite', 'modern_cornerShop', 'modern_house', 'modern_houseSmall', 'modern_largeBuilding', 'modern_oldBuilding', 'modern_petrol', 'modern_shop', 'modern_skyscraper', 'modern_skyscraperGlass', 'modern_trailerpark', 'modern_villa', 'modern_villageLarge', 'sand_01', 'sand_03', 'sand_04', 'sand_05', 'sand_06', 'sand_07', 'sand_08', 'sand_09', 'sand_10', 'sand_11', 'sand_12', 'sand_13', 'sand_14', 'sand_15', 'sand_16', 'sand_17', 'sand_18', 'sand_19', 'scifi_base', 'scifi_building', 'scifi_cargo', 'scifi_corner', 'scifi_domes', 'scifi_energy', 'scifi_factory', 'scifi_factoryHangar', 'scifi_factoryHigh', 'scifi_foliage', 'scifi_hangar', 'scifi_headquarters', 'scifi_living', 'scifi_port', 'scifi_silo', 'scifi_skyscraper', 'scifi_tower', 'stone_01', 'stone_03', 'stone_04', 'stone_05', 'stone_06', 'stone_07', 'stone_08', 'stone_09', 'stone_10', 'stone_11', 'stone_12', 'stone_13', 'stone_14', 'stone_15', 'stone_16', 'stone_17', 'stone_18', 'stone_19', 'western_bank', 'western_general', 'western_indians', 'western_saloon', 'western_sheriff', 'western_station', 'western_watertower'];
+    var smallTiles = ['dirt_19', 'grass_19', 'mars_02', 'sand_02', 'stone_02', ];
+
+    Array.prototype.sample = function() {
+      return this[Math.floor(Math.random() * this.length)];
+    }
+
+    for (var y = 0; y < 10; y++) {
+      var row = document.createElement("div");
+      row.classList.add('row');
+
+      for (var x = 0; x < 10; x++) {
+        var tile = document.createElement("div");
+        tile.classList.add('tile', tileClasses.sample());
+        row.appendChild(tile);
+      }
+      wrapper.appendChild(row);
+    }
+  </script>
+</body>
+</html>
